@@ -1,0 +1,4 @@
+{# Fragment for sale information system on product single item #}
+{% if post.product.is_on_sale() %}
+    {{ fn("apply_filters", 'woocommerce_sale_flash', '<span class="onsale">' ~ pll__( 'Sale!', 'woocommerce' ) ~ '</span>', post, post.product ) }}
+{% endif %}

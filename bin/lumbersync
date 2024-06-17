@@ -1,0 +1,33 @@
+#!/bin/bash
+options=' --recursive --compress --executability --copy-links'
+
+excl=" --exclude \".git/\" --exclude \".hg/\" "
+
+if [[ -f ".syncignore" ]]; then
+    for path in $(cat ".syncignore" | sed '/^#/d;/^$/d' | sed 's:[^~*/a-z0-9._-]::gi' | sed 's:^/::' | sed 's:^|$:":g'); do
+        excl="$excl --exclude $path"
+    done
+elif [[ -f ".gitignore" ]]; then
+    for path in $(cat ".gitignore" | sed '/^#/d;/^$/d' | sed 's:[^*/a-z0-9._-]::gi' | sed 's:^/::' | sed 's:^|$:":g'); do
+        excl="$excl --exclude $path"
+    done
+fi
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+yellow=`tput setaf 3`
+blue=`tput setaf 4`
+magenta=`tput setaf 5`
+cyan=`tput setaf 6`
+white=`tput setaf 7`
+reset=`tput sgr0`
+
+read -p "Synchronize ${yellow}$(basename "$PWD")${reset} with ${magenta}$1${reset} (y/n)? " choice
+case "$choice" in 
+  y|Y ) cmd="rsync $options $excl -e ssh $PWD/* $1;"
+    echo -n 'Synchronizing...'
+    echo "$cmd" | $SHELL
+    echo 'done.';;
+  n|N ) echo "Aborted";;
+  * ) echo "invalid";;
+esac

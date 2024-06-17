@@ -1,0 +1,168 @@
+{% extends "base.twig" %}
+{% import "custom/macro/helper.twig" as helper %}
+
+{#
+	********************** INFORMATIONS **************************
+
+	This is the custem theme template, you can or have to edit it.
+
+	Each block has its own comment and the contents (all of them) 
+	are wrapped by a <div> tag which has the 'wrapper' className
+	
+	********************** INFORMATIONS **************************
+#}
+{# Define here your path to the css file in your theme folder #}
+{% block mainCssBlock %}/static/css/app.bundle.css{% endblock %}
+
+{# Define here your path to the js file in your theme folder #}
+{% block mainJsBlock %}/static/js/app.bundle.js{% endblock %}
+
+{# 
+	Additionnal informations that you want to put in the head html.
+	This block is spotted at the end of the head.
+	Interesting for GA, FbPixel, etc.
+#}
+{% block htmlHead %}
+<link rel="stylesheet" href="/app/themes/lumber/static/fonts/Markova/stylesheet.css" />
+	{% if fn('function_exists', 'acf_add_options_page') %}
+		{{ get_field("cookie_consent_scripts", "option")|raw }}
+	{% endif %}
+{% endblock %}
+{# 
+	Additionnal informations that you want to put in the body html at the end.
+	This block is spotted at the end of the body before the main javascript file.
+	Interesting for adding dependencies.
+#}
+{% block bodyFooter %}
+	
+	{% if options.additionnalScripts is defined %}
+		{{ options.additionnal_scripts|raw }}
+	{% endif %}
+{% endblock %}
+
+{# 
+	Additionnal className for the body. E.G: " home is_cool".
+	Be carreful, the first character must be an empty string
+#}
+{% block extraBodyClass %}{% endblock %}
+
+{% macro extra_node (language_switcher) %}
+
+{% endmacro %}
+
+{# 
+	Header block, no need to explain
+#}
+{% block header %}
+	<header id="main-header">
+		<div>
+			<div id="logo">
+				{% if fn("has_custom_logo") %}
+					{{function("the_custom_logo")}}
+				{% else %}
+					<a href="{{ fn("home_url") }}" class="default-logo">{% include "custom/fragment/logo.twig" %}</a>
+				{% endif %}
+			</div>
+			{# Navigation #}
+			<div id="menu-switcher"><a href="#menu">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						viewBox="0 0 85 83" enable-background="new 0 0 85 83" xml:space="preserve" class="menu" width="60" height="60">
+						<g transform="translate(-1465 -20)">
+							{# <rect x="1465" y="20" fill="#00314A" width="85" height="83" class="rect" /> #}
+							<g transform="translate(1487 40.491)">
+								<path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M0,13.5
+									h40.5"/>
+								<path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M0,0
+									h40.5"/>
+								<path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M0,27
+									h40.5"/>
+							</g>
+						</g>
+					</svg>
+
+				<svg class="close" xmlns="https://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24.203 24.203">
+					<path data-name="Icon ionic-md-close" fill="#ffffff" d="M31.727,9.944l-2.42-2.42L19.625,17.2,9.944,7.523l-2.42,2.42L17.2,19.625,7.523,29.306l2.42,2.42,9.681-9.681,9.681,9.681,2.42-2.42-9.681-9.681Z" transform="translate(-7.523 -7.523)"/>
+				</svg>
+			</a></div>
+			<nav id="nav-main" role="navigation">
+				{% block navBlock %}
+					{% include "core/menu.twig" with { 
+						'menu': header_menu.get_items, 
+						'class' : { 
+							"parent" : [ "menuList" ], 
+							"children" : [
+								"" ] 
+							},
+						"extra_node" : "",
+						"account_node" : ""
+						}
+					%}
+				{% endblock %}
+			</nav>
+			{% if class_exists('woocommerce') %}
+				<section id="cart-wrapper">{% include "woocommerce/fragment/cart.twig" %}</section>
+			{% endif %}
+		</div>
+	</header>
+{% endblock %}
+{# 
+	Main block, no need to explain except that this block is wrapped by the <main> tag
+#}
+{% block main %} 
+	{% if post is defined %}
+		<h1>{{ post.title }}</h1>
+		{{ post.content|wpautop|raw }}
+	{% else %} 
+		{{ pll__("Sorry, there's no content here.") }}
+	{% endif %} 
+{% endblock %}
+{# 
+	Footer block, no need to explain
+#}
+{% block footer %}
+	<footer id="footer" class="default-padding npb">
+		<div class="top container">
+			<div>
+				<nav> 
+					{% if footer_menu %}
+						{% 
+							include "core/menu.twig" with { 
+								'menu': footer_menu.get_items, 
+								'class' : { 
+									"parent" : [ "footer-nav" ], 
+									"children" : [ ] 
+								} 
+							} 
+						%} 
+					{% endif %}
+				</nav>
+			</div>
+			<div class="logo">
+				{% if fn("has_custom_logo") %}
+					{{function("the_custom_logo")}}
+				{% else %}
+					<a href="{{ fn("home_url") }}" class="default-logo">{% include "custom/fragment/logo.twig" %}</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="container">
+				<nav> 
+					{% if legal_menu %}
+						{% 
+							include "core/menu.twig" with { 
+								'menu': legal_menu.get_items, 
+								'class' : { 
+									"parent" : [ "legal-nav" ], 
+									"children" : [ ] 
+								} 
+							} 
+						%} 
+					{% endif %}
+				</nav>
+				<div class="copyright">{{ pll__("© European Alliance for Research Excellence") }}</div>
+				<div class="some">{% include "custom/fragment/social-network.twig" with { some: get_field("social_network", "option") } %}</div>
+			</div>
+		</div>
+	</footer>
+{% endblock %}

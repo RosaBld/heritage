@@ -1,0 +1,15 @@
+
+
+{% do action( 'woocommerce_before_account_navigation' ) %}
+{% if showAccountMenu is defined and showAccountMenu == true %}
+	<nav class="woocommerce-MyAccount-navigation">
+		<ul>
+			{% for endpoint, label in fn("wc_get_account_menu_items")  %}
+				<li class="{{ fn('wc_get_account_menu_item_classes', endpoint ) }}">
+					<a href="{{ fn( "esc_url", fn("wc_get_account_endpoint_url", endpoint) ) }}">{{ fn("esc_html", label ) }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</nav>
+{% endif %}
+{% do action( 'woocommerce_after_account_navigation' ) %}

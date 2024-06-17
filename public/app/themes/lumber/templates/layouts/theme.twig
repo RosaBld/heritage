@@ -1,0 +1,89 @@
+{% extends "base.twig" %}
+{#
+	********************** INFORMATIONS **************************
+
+	This is the default theme template, don't edit it. It serves
+	only to help you about the different existing blocks.
+
+	Each block has its own comment and the contents (all of them) 
+	are wrapped by a <div> tag which has the 'wrapper' className
+	
+	********************** INFORMATIONS **************************
+#}
+{# Define here your path to the css file in your theme folder #}
+{% block mainCssBlock %}/static/css/style.css{% endblock %}
+{# Define here your path to the js file in your theme folder #}
+{% block mainJsBlock %}/static/js/main.bundle.js{% endblock %}
+{# 
+	Additionnal informations that you want to put in the head html.
+	This block is spotted at the end of the head.
+	Interesting for GA, FbPixel, etc.
+#}
+{% block htmlHead %}{% endblock %}
+{# 
+	Additionnal informations that you want to put in the body html at the end.
+	This block is spotted at the end of the body before the main javascript file.
+	Interesting for adding dependencies.
+#}
+{% block bodyFooter %}{% endblock %}
+{# 
+	Additionnal className for the body. E.G: " home is_cool".
+	Be carreful, the first character must be an empty string
+#}
+{% block extraBodyClass %}{% endblock %}
+{# 
+	Header block, no need to explain
+#}
+{% block header %}
+	<header>
+		<div>{{function("the_custom_logo")}}</div>
+		<nav id="nav-main" role="navigation">
+			{% include "core/menu.twig" with { 
+				'menu': header_menu.get_items, 
+				'class' : { 
+					"parent" : [ "menuList" ], 
+					"children" : [
+						"" ] 
+					} 
+				} 
+			%}
+		</nav>
+	</header>
+{% endblock %}
+{# 
+	Main block, no need to explain except that this block is wrapped by the <main> tag
+#}
+{% block main %} 
+	{% if post is defined %}
+		<h1>{{ post.title }}</h1>
+		{{ post.content|wpautop|raw }}
+	{% else %} 
+		{{ pll__("Sorry, there's no content here.") }}
+	{% endif %} 
+{% endblock %}
+{# 
+	Footer block, no need to explain
+#}
+{% block footer %}
+	<footer id="footer">
+		<div>
+			{{function("the_custom_logo")}}
+		</div>
+		{% if footer_menu %}
+			<nav id="footer-nav"> 
+				{% 
+					include "core/menu.twig" with { 
+						'menu': footer_menu.get_items, 
+						'class' : { 
+							"parent" : [ "footer-nav" ], 
+							"children" : [ ] 
+						} 
+					} 
+				%} 
+			</nav>
+		{% endif %}
+		<p class="copyright">
+			©&nbsp;Copyright&nbsp;{{"now"|date('Y')}}&nbsp;{{ site.name }}
+		</p>
+	</footer>
+{% endblock %}

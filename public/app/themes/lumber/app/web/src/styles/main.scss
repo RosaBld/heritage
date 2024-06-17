@@ -1,0 +1,135 @@
+@import "./helpers/reset";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
+$browser-context: 14;
+
+// Greyscale colors
+$grey: (
+    dark: #4A4A4A,
+    regular: #888888, 
+    medium: #d2d2d2,
+    light: #F0F0F0
+)!default;
+
+// General common colors
+$primaryColors: (
+  orange: #FF8202,
+  blue: #2c4173,
+  yellow: #ffd211,
+  black: #000000,
+  white: #FFFFFF,
+  green: #4ADB11,
+  red: #D2001A,
+  magenta: #e8165d,
+  pink: #FB6666
+)!default;
+
+$gl-mq-width: 'max-width';
+
+$gl-mq-list: (
+  lg: 80em,
+  md: 64em,
+  sm: 800px,
+  xs: 630px
+) !default;
+
+$transition: 0.25s all ease-in-out;
+
+// Sizes
+$margin: 20px;
+$container: 1480px;
+$rounded: 40px;
+
+$colors : (
+  main: #F0AD42,
+  secondary: #2C3383,
+  third: #20BDC2,
+  fourth: #F1F5F8,
+  copy: #000000,
+  copylight: #fff
+)!default;
+
+:root {
+  --menu: #005152;
+  --main-color: #005152;
+  --secondary-color: #00BEBE;
+  --third-color: #1DBADF;
+}
+
+$stateColors : (
+  error: #FB6666,
+  success: #4ADB11,
+  info: #2541AD
+)!default;
+
+// Default social network colors
+$social-network-colors: (
+    linkedin: #0077B5,
+    twitter: #08A0E9,
+    facebook: #3C5898,
+    share: #4D4741
+) !default;
+
+$blues: (
+    dark: #0A1946,
+    semi: #1C2F60,
+    regular: #5C6FA5,
+    light: #BFC5D6,
+    transparent: #F0F4FF,
+    header: #192D5D
+)!default;
+
+// Define fonts for the theme
+$fonts: (
+  title: ('Markova', sans-serif),
+  highlight: ('Markova', sans-serif),
+  copy: ('Markova', sans-serif),
+)!default;
+
+
+
+/* Not supposed to be modified for the project */
+@import "./helpers/mixins";
+@import "./helpers/GlightBox";
+@import "./helpers/global";
+@import "./helpers/themes";
+@import "./helpers/spaces";
+@import "./helpers/grid";
+@import "./helpers/cookies";
+/* Modified for the project */
+@import "./fragment/opener";
+@import "./fragment/transition";
+@import "./fragment/fragment";
+@import "./fragment/carousel";
+@import "./fragment/header";
+@import "./fragment/footer";
+@import "./fragment/node";
+/* Specific page for the project */
+@import "./pages/error404";
+@import "./pages/login";
+@import "./pages/home.scss";
+
+.search-form {
+  background: rgba(29,186,223,0.08);
+  padding: 5px 10px;
+  border-radius: 10px;
+  @include bp(sm) {
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  input {
+    color: #002D4A;
+    border: none;
+    background: transparent;
+    max-width: 100px;
+    padding: 7px 15px;
+  }
+  display: flex;
+  button {
+    border: none;
+    background: transparent;
+  }
+}
+

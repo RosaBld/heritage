@@ -1,0 +1,11 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<div class="position-item theme rounded {{ item.post_type == "post" ? "article" : "position" }} {{ item.get_field("scheme") }} has-mouseover-child" data-link="{{ item.link }}">
+    <div class="background-hover"></div>
+    <span class="background" style="{% if item.get_field("overview_image") != "" %}background-image: url({{ helper.imgSrc(item.get_field("overview_image"), 600, 600, "center") }}){% endif %}"></span>
+    <a href="{{ item.link }}">
+        <span class="date">{{ item.date|date(item.post_type == "position" ? "M Y" : "D, M d, Y") }}</span>
+        <span class="title">{{ item.get_field("overview_title") }}</span>
+        {% if item.get_field("overview_content") != "" %}<span class="content">{{ item.get_field("overview_content")|raw|striptags("<em><strong><i><b>") }}</span>{% endif %}
+    </a>
+</div>

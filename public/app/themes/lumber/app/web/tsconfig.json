@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "allowJs": true,
+        "target": "es6",
+        "lib": [
+            "es2017",
+            "dom",
+            "dom.iterable",
+            "es5",
+            "es2015.promise"
+        ],
+        "downlevelIteration": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noImplicitAny": false,
+        "preserveConstEnums": true,
+        "strictNullChecks": false,
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
+        "importHelpers": true,
+        "types": [
+            "webpack-env"
+        ]
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useWebpackText": true,
+        "useTranspileModule": true,
+        "doTypeCheck": true,
+        "forkChecker": true,
+        "useCache": false,
+    },
+    "include": ["src/**/*.ts"],
+
+}

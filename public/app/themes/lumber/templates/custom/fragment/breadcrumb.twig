@@ -1,0 +1,9 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<div class="breadcrumb">
+    <ul>
+        {% for item in items %}
+            <li><a {% if item.link != false %}href="{{ item.link }}"{% endif %}>{{ item.label }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

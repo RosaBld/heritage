@@ -1,0 +1,10 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+{% set link = item.type == "file" ? fn("wp_get_attachment_url", item.file.ID) : item.link %}
+<li class="resource-item" data-aos="fade-up">
+    <a href="{{ link }}" target="_blank">
+        <span class="number">{{ loop.index < 9 ? "0": "" }}{{ loop.index }}</span>
+        <span class="label">{{ item.title }}</span>
+        <span class="icon {{ item.type == "file" ? "download" : "link" }}">{{ helper.icon(item.type == "file" ? "download" : "link") }}</span>
+    </a>
+</li>

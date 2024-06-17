@@ -1,0 +1,14 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<div class="position-item-big theme rounded {{ item.post_type == "post" ? "article" : "position" }} {{ item.get_field("scheme") }}">
+    <div class="background-hover"></div>
+    <span class="background" style="{% if item.get_field("overview_image") != "" %}background-image: url({{ helper.imgSrc(item.get_field("overview_image"), 1920, 1080, "center") }}){% endif %}"></span>
+    <div class="content container default-padding">
+        <div class="date">{{ item.date|date(item.post_type == "position" ? "M Y" : "D, M d, Y") }}</div>
+        <h2 class="title">{{ item.get_field("overview_title") }}</h2>
+        <div class="duo end">
+            <div class="text f-body-p">{{ item.get_field("overview_content")|raw }}</div>
+            <p><a href="{{ item.link }}" class="Button">{{ pll__("Learn more") }}</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+{% spaceless %} {% block html_head_container %}
+<!DOCTYPE html>
+<html {{ site.language_attributes }}>
+<head>
+	<meta charset="{{ site.charset }}" />
+	<title>
+		{% if wp_title %} {{ wp_title }} {% else %} {{ site.name }} {% endif %}
+	</title>
+	<style type="text/css">html { opacity: 0; }</style>
+	<meta name="description" content="{{ site.description }}">
+	<link rel="stylesheet" href="{{ site.theme.link }}{% block mainCssBlock %}{% endblock %}?v={{ " now "|date("ymdhi ") }}" type="text/css" media="screen"
+	/>
+	<link rel="stylesheet" href="https://use.typekit.net/ish4lou.css">
+	<meta name="theme-color" content="#317EFB"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+	<link rel="author" href="{{ site.theme.link }}/humans.txt" />
+	<link rel="pingback" href="{{ site.pingback_url }}" />
+	{% block htmlHead %} {% endblock %}
+	{{function('wp_head')}} 
+</head>
+{% endblock %}
+
+<body class="{{body_class}}{% block extraBodyClass %}{% endblock %}" data-barba="wrapper" data-pid="{{ fn("current_id_page") }}" data-locale="{{ fn("pll_current_language","locale") }}">
+	{{function('edit_post_link', '<i class="fa fa-edit"></i>', '<span class="edit-link" data-barba-prevent="all">', '</span>')}}
+	{% block htmlBody %}
+		{% block header %}
+			<header>
+				<div>{{function("the_custom_logo")}}</div>
+				<nav id="nav-main" role="navigation">
+					{% include "core/menu.twig" with { 
+						'menu': header_menu.get_items, 
+						'class' : { 
+							"parent" : [ "menuList" ], 
+							"children" : [
+								"" ] 
+							} 
+						} 
+					%}
+				</nav>
+			</header>
+		{% endblock %}
+		<section data-barba="container" data-barba-namespace="{{ barbanamespace|default(post is defined ? "post_" ~ post.ID : "single") }}" data-pid="{{ post.ID }}">
+			<main>
+				{% block main %} 
+					{{ pll__("Sorry, there's no content here.") }}
+				{% endblock %}
+			</main>
+			{% block footer %}
+				<footer id="footer">
+					<div>
+						{{function("the_custom_logo")}}
+					</div>
+					{% if footer_menu %}
+						<nav id="footer-nav"> 
+							{% 
+								include "core/menu.twig" with { 
+									'menu': footer_menu.get_items, 
+									'class' : { 
+										"parent" : [ "footer-nav" ], 
+										"children" : [ ] 
+									} 
+								} 
+							%} 
+						</nav>
+					{% endif %}
+					<p class="copyright">
+						©&nbsp;{{"now"|date('Y')}}&nbsp;{{ site.name }}
+					</p>
+				</footer>
+			{% endblock %}
+		</section>
+		
+		{{ function('wp_footer') }}
+			{% block bodyFooter %} {% endblock %}
+				<script class="alpaga" src="{{ site.theme.link }}{% block mainJsBlock %}{% endblock %}?v={{ " now "|date("ymdhi ") }}" type="text/javascript" defer async></script> 
+	{% endblock %}
+	{% block extraFooter %} {% endblock %}
+</body>
+</html>
+{% endspaceless %}

@@ -1,0 +1,52 @@
+# Application
+public/app/plugins/*
+!public/app/plugins/.gitkeep
+public/app/mu-plugins/
+public/app/upgrade
+public/app/uploads/*
+!public/app/uploads/.gitkeep
+reports/
+!reports/.lighthouse.mobile
+!reports/.lighthouse.desktop
+!reports/.lighthouse.mixedcontent
+
+# WordPress
+public/wp
+public/.htaccess
+public/app/languages
+backup/
+
+# WP-CLI
+db-sync
+bin/wp-cli
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vendor (e.g. Composer)
+vendor/*
+bin/phpconsole/vendor/
+!vendor/.gitkeep
+
+# Node Package Manager
+node_modules
+
+# Vagrant
+.vagrant
+
+# Developer shit
+/.local/
+/nbproject/
+.DS_Store
+Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+/logfile
+/node_modules
+Gruntfile.js
+package-lock.json
+composer.lock
+public/app/themes/spruce/app/web/package-lock.json

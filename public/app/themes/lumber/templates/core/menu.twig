@@ -1,0 +1,23 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+{% if menu %}
+	<ul{% if class is defined and class.parent is defined %} class='{{ class.parent|join(" ") }}'{% endif %}>
+	{% set shopId = fn("get_option", "woocommerce_shop_page_id") %}
+	{% for item in menu %}
+		<li class="{{ item.classes | join(' ') }}{% if class is defined and class.children is defined %} {{ class.children|join(" ") }}{% endif %}" data-pid="{{ item.object_id }}">
+			<a target="{{ item.target }}" href="{{ item.link }}"><span>{{ item.title }}</span></a>
+			{% if item.get_children %}
+				{# <div class="angle">{{ helper.arrow("bottom") }}</div> #}
+				<div class="submenu">{% include "core/menu.twig" with {'menu': item.get_children} %}</div>
+			{% endif %}
+		</li>
+	{% endfor %}
+	{% if extra_node is defined %}
+		{{ extra_node }}
+	{% endif %}
+	
+	{% if account_node is defined %}
+		{{ account_node }}
+	{% endif %}
+	</ul>
+{% endif %}

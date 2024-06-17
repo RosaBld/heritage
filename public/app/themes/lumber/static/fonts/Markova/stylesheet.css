@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Markova';
+    src: url('Markova.eot');
+    src: url('Markova.eot?#iefix') format('embedded-opentype'),
+        url('Markova.woff2') format('woff2'),
+        url('Markova.woff') format('woff'),
+        url('Markova.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

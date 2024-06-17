@@ -1,0 +1,26 @@
+
+.opener {
+    justify-content: space-between;
+    display: flex;
+    > span:not(.symbole) { width: 100%; max-width: calc(100% - 30px); }
+    .symbole svg { width: 20px; text-align: right; transform: rotate(180deg); transition: $transition; transform-origin: center; }
+    .stroke {
+        transition: $transition;
+    }
+    &:hover {
+        
+        .stroke {
+            
+        }
+    }
+    &.opened {
+        .symbole svg {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+.bottle:not(.shown) {
+    display: none;
+}
+  

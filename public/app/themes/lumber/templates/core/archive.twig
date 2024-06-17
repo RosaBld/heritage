@@ -1,0 +1,7 @@
+{% extends site.tplReference %}
+
+{% block main %}
+	{% for post in posts %}
+		{% include ['core/tease-'~post.post_type~'.twig', 'core/tease.twig'] %}
+	{% endfor %}
+{% endblock %}

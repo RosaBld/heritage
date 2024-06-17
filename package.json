@@ -1,0 +1,23 @@
+{
+  "name": "lumber.com",
+  "version": "1.0.0",
+  "description": "Lumber is a modern WordPress stack made by [Alpaga](https://alpaga.agency/) that helps you get started with the best development tools and project structure. Based on [Bedrock](https://roots.io/bedrock/) and [Spruce](https://github.com/AlpagaAgency/spruce)",
+  "main": "index.js",
+  "bin": {
+    "lumber.com": "bin/salts.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@barba/core": "^2.9.7",
+    "@glidejs/glide": "^3.6.0",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@types/glidejs__glide": "^3.6.5"
+  }
+}

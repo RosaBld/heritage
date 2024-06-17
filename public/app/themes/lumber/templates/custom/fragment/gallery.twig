@@ -1,0 +1,23 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+{% macro item(item) %}
+    <div class="image-item">
+        {{ helper.img(item, 850, 850, "center") }}
+    </div>
+{% endmacro %}
+
+{% if images|length %}
+    <section class="gallery-block {{ classes|default([])|join(" ") }}">
+        <div class="inner">
+            {{ 
+                helper.carousel(
+                    images|map((item) => "#{ _self.item(item) }"), 
+                    'data-type="carousel" data-focus="center" data-namespace="home" data-view="3" data-gap="0" data-xs-gap="0" data-md-view="3" data-lg-view="3" data-sm-view="2" data-xs-view="1" data-xs-focus="0"', 
+                    "self",
+                    true,
+                    true
+                ) 
+            }}
+        </div>
+    </section>
+{% endif %}

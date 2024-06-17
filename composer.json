@@ -1,0 +1,89 @@
+{
+	"name": "alpaga/lumber",
+	"type": "project",
+	"license": "MIT",
+	"description": "The bedrock wordpress template made with passion",
+	"homepage": "https://alpaga.agency",
+	"authors": [
+		{
+			"name": "Frédéric Faltin",
+			"email": "ffaltin@alpaga.agency"
+		}
+	],
+	"keywords": [
+		"bedrock", "wordpress", "stack", "composer", "timber", "acf", "alpaga"
+	],
+	"support": {
+		"issues": "https://code.alpaga.agency/alpaga/lumber/issues"
+	},
+	"config": {
+		"preferred-install": "dist",
+		"allow-plugins": {
+			"composer/installers": true,
+			"johnpbloch/wordpress-core-installer": true,
+			"pivvenit/acf-pro-installer": true
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		},
+		{
+            "type": "git",
+            "url": "https://github.com/AlpagaAgency/spruce"
+        },
+		{
+            "type": "git",
+            "url": "https://github.com/ffaltin/timber-integration-woocommerce"
+        },
+		{
+			"type": "package",
+			"package": {
+				"name": "advanced-custom-fields/advanced-custom-fields-pro",
+				"version": "5.11.4",
+				"type": "wordpress-plugin",
+				"dist": {
+					"type": "zip",
+					"url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download"
+				},
+				"require": {
+					"pivvenit/acf-pro-installer": "3.0",
+					"composer/installers": "*"
+				}
+			}
+		}
+	],
+	"require": {
+		"php": ">=7.0|^8.0",
+		"composer/installers": "~1.0.12",
+		"vlucas/phpdotenv": "^5.4.0",
+		"johnpbloch/wordpress": "*",
+		"oscarotero/env": "^1.0",
+		"roots/wp-password-bcrypt": "^1.0",
+		"timber/timber": "v1.x",
+		"advanced-custom-fields/advanced-custom-fields-pro": "5.11.4",
+		"alpagastudio/spruce" : "dev-master",
+		"wpackagist-plugin/polylang": "*",
+		"wpackagist-plugin/acf-options-for-polylang": "*",
+		"mailchimp/transactional": "^1.0",
+		"fire015/flintstone": "^2.3",
+		"swiftmailer/swiftmailer": "^6.0"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^2.5.1"
+	},
+	"extra": {
+		"installer-paths": {
+			"public/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+			"public/app/plugins/{$name}/": ["type:wordpress-plugin", "wpackagist-plugin/polylang", "wpackagist-plugin/acf-options-for-polylang"],
+			"public/app/themes/{$name}/": ["type:wordpress-theme"]
+		},
+		"wordpress-install-dir": "public/wp"
+	},
+	"scripts": {
+		"test": [
+			"vendor/bin/phpcs --ignore=public/wp/,vendor/ -n -s ."
+		]
+	}
+}

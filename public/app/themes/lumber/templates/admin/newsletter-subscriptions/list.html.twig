@@ -1,0 +1,30 @@
+
+<h1>{{ pll__("Subscriptions") }}</h1>
+<table class="wp-list-table widefat striped table-view-list" style="width: calc(100% - 50px)">
+    <thead>
+        <tr>
+            <th scope="col" class="manage-column">ID</th>
+            <th scope="col" class="manage-column">Language</th>
+            <th scope="col" class="manage-column">E-mail</th>
+            <th scope="col" class="manage-column">Date</th>
+        </tr>
+    </thead>
+    <tbody id="the-list">
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ subscription.id }}</td>
+                <td>{{ subscription.language_code }}</td>
+                <td>{{ subscription.email }}</td>
+                <td>{{ subscription.date|date("Y.m.d") }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+(function($) {
+  $(document).ready(function() {
+    
+  });
+})(jQuery);
+</script>

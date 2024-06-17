@@ -1,0 +1,22 @@
+
+.swal-modal {
+    border-radius: 0px;
+    font-family: map-get($fonts, title );
+    .swal-text {
+        text-align: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .swal-footer {
+        text-align: center;
+        .swal-button {
+            background: map-get($colors, main);
+            border-radius: 0px;
+            transition: 0.2s all ease-in;
+            &:hover, &:focus {
+                background: map-get($colors, secondary);
+            }
+        }
+    }
+}

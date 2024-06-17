@@ -1,0 +1,7 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<ul class="row by-four sm-two" id="partners">
+    {% for item in get_field("our_members_items", element.ID) %}
+        <li data-aos="fade-up" data-aos-delay="{{ loop.index * 50 }}"><a href="{{ item.link != "" ? item.link : "#" }}">{{ helper.img(item.logo, 400) }}</a></li>
+    {% endfor %}
+</ul>

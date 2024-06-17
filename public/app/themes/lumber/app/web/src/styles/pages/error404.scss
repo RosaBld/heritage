@@ -1,0 +1,61 @@
+section.error404 {
+    margin-top: 15%;
+    max-height: 100vh;
+    position: relative;
+
+    h1, h2 {
+        color: white;
+        font-size: 3em;
+        margin-bottom: 11vw;
+
+        @media (max-width: 768px) {
+            font-size: 1.5em;
+            padding: 15vw 0 20vw 0;
+        }
+        
+    }
+    
+    #b {
+        position: relative;
+        width: 14vw;
+        z-index:-1;
+        bottom: 25vw;
+        right: 14vw;
+
+        @media (max-width: 768px) {
+            width: 60vw;
+            position: absolute;
+            top: 0;
+            right: 70%;
+        }
+    }
+
+    img {
+        position: absolute;
+        width: 45vw;
+        right: 0;
+        bottom: 0;
+
+        @media (max-width: 768px) {
+            position: static;
+            width: 80vw;
+        }
+    }
+
+    .Button {
+        background-color: #5E8B91;
+        font-family: 'essonnes-display';
+        position: relative;
+        bottom: 20vw;
+        &:hover {
+            background-color: #D8684F;
+        }
+
+        @media (max-width: 768px) {
+            bottom: 5vw;
+            margin-bottom: 50vw;
+        }
+    }
+
+
+}

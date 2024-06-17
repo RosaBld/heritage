@@ -1,0 +1,81 @@
+
+.theme {
+    &.rounded {
+      border-radius: 38px;
+    }
+    &.large-rounded {
+      border-radius: 50px;
+    }
+    &.has-mouseover {
+      transition: background 0.2s ease-in-out;
+    }
+    &.white {
+      background-color: #fff;
+      @include colorgroup(c(copy));
+    }
+    &.darkblue{
+      background-color: c(secondary);
+      @include colorgroup(#fff);
+      @include colorlink(#fff, #fff);
+      &.has-mouseover:hover {
+        background-color: c(main);
+      }
+      &.has-mouserover-child {
+        .background-hover { background-color: c(main)!important;  }
+      }
+    }
+    &.yellow{
+      background-color: c(main);
+      @include colorgroup(#fff);
+      @include colorlink(#fff, #fff);
+      &.dark-text {
+        @include colorgroup(c(copy));
+        @include colorlink(c(copy), c(copy));
+      }
+      &.has-mouseover:hover {
+        background-color: c(third);
+      }
+      &.has-mouserover-child {
+        .background-hover { background-color: c(third)!important; }
+      }
+      hr {
+        border: 0;
+        border-bottom: 1px solid #372E3C;
+        margin: 60px 0 30px;
+      }
+    }
+    &.lightblue {
+      background-color: c(third);
+      @include colorgroup(#fff);
+      @include colorlink(#fff, #fff);
+      &.has-mouseover:hover {
+        background-color: c(secondary);
+      }
+      &.has-mouserover-child {
+        .background-hover { background-color: c(secondary)!important; }
+      }
+    }
+  }
+  
+  @include bp(sm) {
+    .sm-theme {
+      &.rounded {
+        border-radius: 50px;
+        > div {
+          padding: 50px;
+        }
+      }
+    }
+  }
+  
+  @include bp(xs) {
+    .xs-theme {
+      &.rounded {
+        border-radius: 50px;
+        > div {
+          padding: 50px;
+        }
+      }
+    }
+  }
+  

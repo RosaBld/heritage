@@ -1,0 +1,150 @@
+{% macro arrow (direction = "left", size = "100" ) %}
+	<svg class="arrow-svg {{ direction }}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ 8.04 / 100 * size }}" height="{{ 13.194 / 100 * size }}" viewBox="0 0 8.04 13.194">
+		<defs>
+			<clipPath id="clip-path">
+				<rect width="13.193" height="8.04" fill="#000" class="fill"/>
+			</clipPath>
+		</defs>
+		<g transform="translate(0 13.194) rotate(-90)">
+			<g transform="translate(0 0)" clip-path="url(#clip-path)">
+				<path d="M13.035,1.054l0,0L12.142.16a.542.542,0,0,0-.766,0l0,0L9.968,1.583l-.011.012L8.086,3.486l0,0L6.63,4.952,3.665,2.02h-.01l-.432-.436h0L1.819.163a.542.542,0,0,0-.766,0l0,0L.16,1.051a.542.542,0,0,0,0,.766l0,0L4.9,6.61,6.176,7.885a.54.54,0,0,0,.419.154.54.54,0,0,0,.419-.154L8.294,6.61l4.742-4.788a.545.545,0,0,0,0-.768" transform="translate(0 0)" fill="#000" class="fill"/>
+			</g>
+		</g>
+	</svg>
+{% endmacro %}
+
+{% macro img (node, width = false, height = 0, crop = false, asBackground = false ) %}{% spaceless %}
+	{% set picture  = TimberImage(node) %}
+	{% if width != false %}
+		{% if asBackground %}<div style="background-image: url({{ picture.src|resize(width, height, crop) }})" class="imageWrapper">{% endif %}
+		<img src="{{ picture.src|resize(width, height, crop) }}" alt="{{ picture.alt }}" />
+		{% if asBackground %}</div>{% endif %}
+	{% else %}
+		{% if asBackground %}<div style="background-image: url({{ picture.src }})" class="imageWrapper">{% endif %}
+			<img src="{{ picture.src|resize(width, height, crop) }}" alt="{{ picture.alt }}" />
+		{% if asBackground %}</div>{% endif %}
+	{% endif %}
+{% endspaceless %}{% endmacro %}
+
+{% macro imgSrc (node) %}{% spaceless %}
+	{% set picture  = TimberImage(node) %}
+	{{ picture.src }}
+{% endspaceless %}{% endmacro %}
+
+{% macro slide(slide, tpl) %}
+	{% if tpl == "simple" %}
+		<div class="carouselItem">
+			<p>{{ _self.img(slide.picture) }}</p>
+        </div>
+	{% elseif tpl == "image" %}
+		<div class="carouselItem">
+			<p>{{ _self.img(slide) }}</p>
+        </div>
+	{% elseif tpl == "position" %}
+		{% include "custom/fragment/position.twig" with { item: slide } %}
+	{% elseif tpl == "bigposition" %}
+		{% include "custom/fragment/bigposition.twig" with { item: slide } %}
+	{% else %}
+		{{ slide|raw }}
+	{% endif %}
+{% endmacro %}
+
+{% macro Button (button, classesName = [ ], wrapped = false, data = "" ) %}
+	{% if button != "" %}
+	{% if wrapped %}<p class="ButtonWrapper">{% endif %}<a class="Button {{ classesName|join(" ") }}" href="{{ button.url }}" target="{{ button.target }}" {{ data }}>
+		<span>{{ button.title }}</span>
+		{% if "arrow" in classesName %}
+			{{ _self.arrow("right") }}
+		{% endif %}
+		{% if "plus" in classesName %}
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.551" height="18.551" viewBox="0 0 18.551 18.551">
+				<defs>
+					<clipPath id="clip-path">
+					<rect id="Rectangle_462" data-name="Rectangle 462" width="13.193" height="8.04" fill="#fff" stroke="#00bebe" stroke-width="1"/>
+					</clipPath>
+				</defs>
+				<g id="Group_574" data-name="Group 574" transform="translate(-964.822 -717.245)">
+					<g id="Group_114" data-name="Group 114" transform="translate(974.151 735.795) rotate(-135)">
+					<g id="Group_30" data-name="Group 30" transform="translate(0 0)" clip-path="url(#clip-path)">
+						<path id="Path_7" data-name="Path 7" d="M13.035,1.054l0,0L12.142.16a.542.542,0,0,0-.766,0l0,0L9.968,1.583l-.011.012L8.086,3.486l0,0L6.63,4.952,3.665,2.02h-.01l-.432-.436h0L1.819.163a.542.542,0,0,0-.766,0l0,0L.16,1.051a.542.542,0,0,0,0,.766l0,0L4.9,6.61,6.176,7.885a.54.54,0,0,0,.419.154.54.54,0,0,0,.419-.154L8.294,6.61l4.742-4.788a.545.545,0,0,0,0-.768" transform="translate(0 0)" fill="#fff" stroke="#00bebe" stroke-width="1"/>
+					</g>
+					</g>
+					<g id="Group_411" data-name="Group 411" transform="translate(974.043 717.245) rotate(45)">
+					<g id="Group_30-2" data-name="Group 30" transform="translate(0 0)" clip-path="url(#clip-path)">
+						<path id="Path_7-2" data-name="Path 7" d="M13.035,1.054l0,0L12.142.16a.542.542,0,0,0-.766,0l0,0L9.968,1.583l-.011.012L8.086,3.486l0,0L6.63,4.952,3.665,2.02h-.01l-.432-.436h0L1.819.163a.542.542,0,0,0-.766,0l0,0L.16,1.051a.542.542,0,0,0,0,.766l0,0L4.9,6.61,6.176,7.885a.54.54,0,0,0,.419.154.54.54,0,0,0,.419-.154L8.294,6.61l4.742-4.788a.545.545,0,0,0,0-.768" transform="translate(0 0)" fill="#fff" stroke="#00bebe" stroke-width="1"/>
+					</g>
+					</g>
+				</g>
+				</svg>
+
+		{% endif %}
+	</a>{% if wrapped %}</p>{% endif %}
+	{% endif %}
+{% endmacro %}
+
+{% macro carousel(slides, data, tpl = "simple", useControl = true, useNavigation = true, custom = false ) %}{% spaceless %}
+	<div class="carouselWrapper" {{ data }} data-items-length="{{ slides|length }}">
+		<div class="glide">
+			<div class="carousel__track glide__track" data-glide-el="track">
+				<ul class="carousel__slides glide__slides">
+					{% for slide in slides %}
+						<li class="carousel__frame glide__slide">{{ _self.slide(slide, tpl) }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% if useControl %}
+				<div data-glide-el="controls" class="controls">
+					<button class="carousel__arrow carousel__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+						{{ _self.arrow("left") }}
+					</button>
+					<button class="carousel__arrow carousel__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+						{{ _self.arrow("right") }}
+					</button>
+				</div>
+			{% endif %}
+			{% if useNavigation %}
+				<div class="carousel__bullets glide__bullets" data-glide-el="controls[nav]">
+					{% for slide in slides %}
+						<button class="glide__bullet" data-glide-dir="={{ loop.index - 1 }}"></button>
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% if custom %}
+				{{ custom|raw }}
+			{% endif %}
+		</div>
+	</div>
+{% endspaceless %}{% endmacro %}
+
+{% macro article (post) %}{% spaceless %}
+	<div class="article">
+		<div class="image">
+			{{ _self.img(post.thumbnail, 240 * 2, 180 * 2, "center" ) }}
+		</div>
+		<div class="informations">
+			<div class="categories">
+				<ul>
+					{% for term in post.terms if term.taxonomy == "category" %}
+						<li>{{ term.name }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{# <div class="date">{{ post.date|date("d.m.Y") }}</div> #}
+			<h2>{{post.title}}</h2>
+			<p>{{post.preview.length(50).read_more(false) }}</p>
+			{# <p class="more"><a href="{{ post.link }}">{{ pll__("Lire la suite") }}</a></p> #}
+		</div>
+	</div>
+{% endspaceless %}{% endmacro %}
+
+{% macro articles (items, classesName = []) %}{% spaceless %}
+	<ul class="articles {{ classesName|join(" ") }}">
+		{% for item in items %}
+			<li>{{ _self.article(item) }}</li>
+		{% endfor %}
+	</ul>
+{% endspaceless %}{% endmacro %}
+
+{% macro icon ( type = "download" ) %}
+	{% include "custom/icon/" ~ type ~ ".svg" %}
+{% endmacro %}

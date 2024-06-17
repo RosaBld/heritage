@@ -1,0 +1,13 @@
+{
+    "name": "alpaga/lumber-console",
+    "description": "The installation Lumber console",
+    "require": {
+        "symfony/console": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Console\\": "src"
+        },
+        "classmap": ["src"]
+    }
+}

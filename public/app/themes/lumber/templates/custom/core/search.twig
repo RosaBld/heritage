@@ -1,0 +1,62 @@
+{% extends site.tplReference %}
+{% import "custom/macro/helper.twig" as helper %}
+
+{% set types = {
+	project: pll__("Projet"),
+	post: pll__("Article"),
+	page: pll__("Page"),
+} %}
+
+{% set highlight = get_field("highlight", fn("get_option", 'page_for_posts')) %}
+{% if highlight != "" %}{% set hlPost = TimberPost(highlight) %}{% endif %}
+{% block htmlHead %}
+	{{ parent() }}
+	<style type="text/css">
+		
+	</style>
+{% endblock %}
+
+{% block main %}
+
+<section id="main-content">
+	<div class="container default-padding">
+		{% set postsLength = posts|length %}
+		<div class="tease-container">
+			<h1>{{ title != "" ? title : pll__("Toutes nos actualités") }}</h1>
+			{% if postsLength %}
+				<ul class="articles row by-three sm-two xs-one stretch">
+					{% for item in posts %}
+						<li>{% include "custom/core/tease.twig" with { 
+							post: item, showPreview: false, image: false,
+							information: types[item.post_type] is defined ? types[item.post_type] : item.post_type|capitalize
+						} %}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p class="no-article">{{ pll__("Nous sommes désolé, nous n'avons aucun article à vous proposer.") }}</p>
+			{% endif %}
+		</div>
+
+		<div class="tool-pagination">
+			{% if posts.pagination.prev %}
+				<a href="{{posts.pagination.prev.link}}" class="prev {{posts.pagination.prev.link|length ? '' : 'invisible'}}"><em class="fa fa-angle-left"></em></a>
+			{% endif %}
+			<ul class="pages">
+				{% for page in posts.pagination.pages %}
+					<li>
+						{% if page.link %}
+							<a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+						{% else %}
+							<span class="{{page.class}}">{{page.title}}</span>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+			{% if posts.pagination.next %}
+				<a href="{{posts.pagination.next.link}}" class="next {{posts.pagination.next.link|length ? '' : 'invisible'}}"><em class="fa fa-angle-right"></em></a>
+			{% endif %}
+		</div>
+	</div>
+</section>
+
+{% endblock %}

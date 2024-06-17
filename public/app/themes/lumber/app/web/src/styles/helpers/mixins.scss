@@ -1,0 +1,242 @@
+// Make the breakpoints
+@mixin bp($breakpoint, $mq: $gl-mq-width) {
+    $query: map-get($gl-mq-list, $breakpoint);
+    @if $query != null {
+        @media screen and ($mq: #{nth($query, 1)}) {
+            @content;
+        }
+    }
+}
+
+@mixin mq($breakpoint, $mq: $gl-mq-width) {
+    @media screen and ($mq: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin mqor($first, $second, $mq: $gl-mq-width, $mqor: max-height) {
+    @media screen and ($mq: $first), screen and ($mqor: $second) {
+        @content;
+    }
+}
+
+@mixin container($minus: 0) {
+    max-width: $container - $minus;
+    width: 85%;
+    margin: 0 auto;
+}
+
+@mixin Button(
+    $type: default, 
+    $color: #fff, 
+    $bg: map-get($colors, secondary), 
+    $colorHover: #fff, 
+    $bgHover: map-get($colors, main)
+) {
+    cursor: pointer;
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 7px;
+    font-size: 18px;
+    font-family: map-get($fonts, title);
+    text-decoration: none;
+    transition: $transition;
+    font-weight: bold;
+    // letter-spacing: 1px;
+    border: 1px solid transparent;
+    @include bp(xs) { font-size: 0.9em; padding: 10px 15px; }
+
+    &.arrow, &.plus {
+        > span, svg { 
+            display: inline-block;
+            vertical-align: middle;
+        }
+        svg {
+            margin-left: 20px;
+            position: relative;
+            left: -5px;
+            transition: $transition;
+        }
+        &:hover {
+            svg {
+                left: 3px;
+            }
+        }
+    }
+    
+    &.download {
+        > span, svg { 
+            display: inline-block;
+            vertical-align: middle;
+        }
+        svg {
+            margin-left: 20px;
+            position: relative;
+            // left: -5px;
+            transition: $transition;
+        }
+        // &:hover {
+        //     svg {
+        //         left: 3px;
+        //    }
+        // }
+    }
+    
+    @if $type == "default" {
+        background: #fff;
+        color: map-get($colors, third);
+        border: 1px solid transparent;
+        &:hover {
+            background: transparent;
+            color: #fff;
+            border-color: c(third);
+        }
+    }
+    
+    @if $type == "dark" {
+        background: map-get($colors, main);
+        color: #fff;
+        &:hover {
+            background: map-get($colors, secondary);
+            color: #fff;
+        }
+    }
+    
+    @if $type == "revert" {
+        background: $bgHover;
+        color: $colorHover;
+        &:hover {
+            background: $bg;
+            color: $color;
+        }
+    }
+    
+    @if $type == "outline" {
+        background: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        &:hover {
+            background: #fff;
+            color: c(main);
+            border-color: #fff;
+        }
+    }
+
+    // @include bp(xs) {
+    //     display: block;
+    //     text-align: center;
+    // }
+}
+
+@mixin fontSize ($base, $sm : 0, $xs: 0) {
+    font-size: $base;
+    @include bp(sm) { 
+        @if $sm != 0 { font-size: $sm;}
+        @else { font-size: $base * 0.75; }
+    }
+    @include bp(xs) { 
+        @if $xs != 0 { font-size: $xs;}
+        @else { font-size: $base * 0.5; }
+    }
+}
+
+@function decimal-round ($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @if $digits > 0 {
+        @for $i from 1 through $digits {
+            $n: $n * 10;
+        }
+    }
+    @if $mode == round {
+        @return round($number * $n) / $n;
+    } @else if $mode == ceil {
+        @return ceil($number * $n) / $n;
+    } @else if $mode == floor {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}
+
+@function pxtoem($value: 16, $context: $browser-context) {
+    @return decimal-round($value / $context, 2 ) * 1em;
+}
+
+@function r($size) {
+    @return $size * 1.50;
+}
+
+@function ff($font-family) {
+    $query: map-get($fonts, $font-family);
+    @if $query != null {
+        @return $query;
+    }
+}
+
+@mixin colorgroup($color: #000000) {
+    h1, h2, h3, h4, h5, p, li, td, span, div {
+        color: $color;
+    }
+}
+
+@mixin colorlink ($color: #000000, $mouseover: #121212) {
+    a {
+        transition: $transition;
+        color: $color;
+        &:hover { color: $mouseover; }
+    }
+}
+
+@function c($color) {
+    $query: map-get($colors, $color);
+    @if $query != null {
+        @return $query;
+    }
+}
+
+@mixin wh($width, $height, $var : none, $value : 0px) {
+
+    $ratio: 0.9;
+    $width: $width * $ratio;
+    $height: $height * $ratio;
+
+    width: $width;
+    height: $height;
+
+    @if $var != none {
+        #{$var} : $value;
+    }
+
+    @each $name, $v in $gallery-gl-list {
+        @include mq($name * 1px) {
+            @if ($v == 0) {
+                width: 100%;
+                height: auto;
+                @if $var != none {
+                    #{$var} : 0;
+                }
+            } 
+            @else {
+                width: $width / $v;
+                height: $height / $v;
+                @if $var != none {
+                    #{$var} : $value / $v;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+
+.default-padding {
+    padding: 100px 0;
+    @include bp(lg) { padding: 85px 0; }
+    @include bp(sm) { padding: 70px 0; }
+    @include bp(xs) { padding: 50px 0; }
+}
+
+.big-padding {
+    padding: 140px 0;
+    @include bp(lg) { padding: 100px 0; }
+    @include bp(sm) { padding: 70px 0; }
+    @include bp(xs) { padding: 50px 0; }
+}
+
+.fat-padding {
+    padding: 200px 0;
+    @include bp(lg) { padding: 140px 0; }
+    @include bp(sm) { padding: 100px 0; }
+    @include bp(xs) { padding: 50px 0; }
+}
+
+.medium-padding {
+    padding: 80px 0;
+    @include bp(lg) { padding: 70px 0; }
+    @include bp(sm) { padding: 60px 0; }
+    @include bp(xs) { padding: 50px 0; }
+}
+
+.small-padding {
+    padding: 60px 0;
+    @include bp(lg) { padding: 55px 0; }
+    @include bp(sm) { padding: 50px 0; }
+    @include bp(xs) { padding: 40px 0; }
+}
+
+.tiny-padding {
+    padding: 30px 0;
+    @include bp(lg) { padding: 25px 0; }
+    @include bp(sm) { padding: 20px 0; }
+    @include bp(xs) { padding: 20px 0; }
+}
+
+.small-padding-bottom {
+    padding-bottom: 60px;
+    @include bp(lg) { padding-bottom: 55px; }
+    @include bp(sm) { padding-bottom: 50px; }
+    @include bp(xs) { padding-bottom: 40px; }
+}
+
+.default-padding-bottom {
+    padding-bottom: 100px;
+    @include bp(lg) { padding-bottom: 85px; }
+    @include bp(sm) { padding-bottom: 70px; }
+    @include bp(xs) { padding-bottom: 50px; }
+}
+
+.side-padding {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.xsmall-padding {
+    padding: 20px 0;
+}
+
+.npb { padding-bottom: 0px;}
+.npt { padding-top: 0px;}

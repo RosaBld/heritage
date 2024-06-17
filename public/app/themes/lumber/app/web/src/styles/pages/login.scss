@@ -1,0 +1,44 @@
+
+.login-action-login {
+	background: map-get($colors, main);
+}
+
+.login-action-login #nav a, .login-action-login #backtoblog a {
+	color: map-get($grey, dark)!important;
+	font-weight: bold;
+	background: map-get($primaryColors, white);
+	display: inline-block;
+	padding: 5px 10px;
+}
+
+.login-action-login #nav a:hover, .login-action-login #backtoblog a:hover {
+	color: map-get($primaryColors, yellow);
+	font-weight: bold;
+}
+
+.login-action-login.wp-core-ui .button {
+	border-radius: 0px!important;
+	box-shadow: none;
+	border: none;
+	background: map-get($colors, secondary)!important;
+	border-color: none!important;
+	box-shadow: none!important;
+	color: map-get($primaryColors, white)!important;
+	text-decoration: none!important;
+	text-shadow: none!important;
+	text-transform: uppercase;
+	font-weight: bold;
+	transition: 0.2s all ease-in;
+	&:hover {
+		background: map-get($colors, main)!important;
+	}
+}
+
+#login h1 a, .login-action-login h1 a {
+	background-image: url(/app/themes/lumber/app/static/lumber-logo.png);
+height:100px;
+width:200px;
+background-size: contain;
+background-repeat: no-repeat;
+	padding-bottom: 30px;
+}

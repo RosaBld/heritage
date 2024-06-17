@@ -1,0 +1,15 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<section class="newsletter-block">
+    <form action="" method="post">
+        <div class="row">
+            <div class="form-group">
+                <input type="hidden" name="language" class="newsletter-language" value="{{ fn("pll_current_language") }}" />
+                <input type="email" name="email" class="newsletter-email" placeholder="{{ pll__("Votre e-mail") }}" required />
+                <button class="Button">
+                    {{ pll__("S'inscrire") }}
+                </button>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,48 @@
+.glide-overlap {
+    overflow: hidden;
+    .glide__track {
+        overflow: visible;
+    }
+}
+
+.glide .controls {
+    .carousel__arrow {
+        svg { height: 25px; width: 25px; .fill { transition: $transition; } }
+        &:hover { .fill { fill: c(main); }}
+        &.glide__arrow--prev { left: auto; right: 40px; }
+        &.glide__arrow--next { right: 0px!important; }
+        bottom: auto;
+        top: -80px;
+        @include bp(xs) {
+            top: -30px;
+        }
+    }
+}
+
+.carouselWrapper {
+    &.hide-next > .glide > .controls > .glide__arrow.glide__arrow--next { opacity: 0.4!important; pointer-events: none!important; }
+    &.has-next > .glide > .controls > .glide__arrow.glide__arrow--next { opacity: 1; pointer-events: initial; }
+    &.has-prev > .glide > .controls > .glide__arrow.glide__arrow--prev { opacity: 1; pointer-events: initial; }
+    > .glide {
+        position: relative;
+        .carousel__slides {
+            display: flex;
+            align-items: stretch;
+            > .glide__slide {
+                
+                height: auto;
+            }
+        }
+        > .controls {
+            .glide__arrow {
+                opacity: 0.4;
+                border: 0;
+                padding: 0;
+                pointer-events: none;
+                box-shadow: none;
+                // @include bp(xs) { display: none; }
+                &.glide__arrow--next { right: 0px; svg { display: block;  } }
+            }
+        }
+    } 
+}

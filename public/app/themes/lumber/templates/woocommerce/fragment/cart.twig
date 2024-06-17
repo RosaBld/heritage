@@ -1,0 +1,55 @@
+{% if function("class_exists", "WooCommerce") == true %}
+	{% set cartItems = [] %}
+	<div class="Cart preview cart-mini-contents" data-preview="3000">
+		<a
+			class=""
+			href="{{ fn('wc_get_cart_url') }}"
+			title="{{ __('View cart') }}"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+			<span class="count">{{ cart.get_cart_contents_count }}</span>
+		</a>
+		<div class="data">
+			<div class="inner">
+				{% for id, cartItem in cart.get_cart() if id not in cartItems %}
+					{% set cartItem = cartItem(cartItem) %}
+					<section class="Item {{ loop.index == 1 ? "first" : "" }}">
+						<div class="informations">
+							<div>
+								<h3 class="title">{{ cartItem.title }}</h3>
+								<p class="price">{{ cartItem.price.default }}</p>
+								<div class="grid-2 actions">
+									<div class="col qty">
+										<span>{{ __("Qté:") }} {{ cartItem.quantity }}</span>
+									</div>
+									<div class="col rm">
+										<a href="{{ function("wc_get_cart_remove_url", id) }}" title="{{ pll__("Supprimer de mon panier") }}" data-success="{{ pll__("'%s' a été supprimé de votre panier")|format(cartItem.title) }}" data-stop="{{ pll__("Votre panier n'a pas été modifié.") }}" data-message="{{ pll__("Etes-vous sur de vouloir supprimer '%s' de votre panier ?")|format(cartItem.title) }}" class="rm"><span>X</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					{% set cartItems = cartItems|merge([ id ]) %}
+				{% else %}
+					<p class="nothing">{{ pll__("Votre panier est vide.") }}</p>
+				{% endfor %}
+				<div class="subtotal">
+					<table>
+						<tbody>
+							<tr>
+								<td>{{ pll__("Total") }}</td>
+								<td>{{ cart.get_cart_total() }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p><a
+					class="Button"
+					{# href="{{ fn('wc_get_checkout_url') }}" #}
+					href="{{ fn('wc_get_cart_url') }}"
+					title="{{ pll__('Voir mon panier') }}"
+				>{{ pll__('Voir mon panier') }}</a></p>
+			</div>
+		</div>
+	</div>
+{% endif %}

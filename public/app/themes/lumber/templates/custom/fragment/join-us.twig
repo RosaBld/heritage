@@ -1,0 +1,21 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<section class="join-us-block {{ classes|default([])|join(" ") }} default-padding">
+    <div class="container theme darkblue rounded default-padding has-shapes">
+        <div class="joinus"><img src="{{ site.theme.path }}/static/gfx/joinus.svg" alt="{{ pll__("Join us") }}" /></div>
+        <div class="shapes back">
+            <div class="shape multi rellax" data-rellax-speed="0.15"></div>
+        </div>
+        <div class="shapes front">
+            <div class="shape multi rellax" data-rellax-speed="0.5"></div>
+            <div class="shape round yellow rellax" data-rellax-speed="1"></div>
+        </div>
+        <div class="shapes front"></div>
+        {% filter shortcodes %}
+        <div class="duo container start medium md-split">
+            <div class="text f-body-p ul"><div>{{ item.get_field("text")|wpautop|raw }}</div></div>
+            <div class="form">{{ item.get_field("form")|raw }}</div>
+        </div>
+        {% endfilter %}
+    </div>
+</section>

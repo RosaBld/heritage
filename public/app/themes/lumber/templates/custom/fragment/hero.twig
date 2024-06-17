@@ -1,0 +1,16 @@
+{% import "custom/macro/helper.twig" as helper %}
+
+<section class="block-hero {{ classes|default([])|join(" ") }} theme {{ themeName|default("blue") }} oh">
+    <div class="container duo">
+        <div class="content">{{ content|raw }}</div>
+        <div class="image">
+            <div>{{ helper.img(image, 750, 750, "center") }}</div>
+        </div>
+    </div>
+    <div class="call-to-action"><div class="container">
+        <a href="{{ button.url }}" class="{{ button.url == "#" ? "next-block" : "" }} link">
+            <span>{{ button.title }}</span>
+            <svg id="b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.91 21.95" width="15" height="20"><g id="c"><g id="d"><g><path id="e" d="m7.46,0C3.34,0,0,3.34,0,7.46v7.12c.05,4.12,3.42,7.42,7.54,7.37,4.05-.05,7.32-3.32,7.37-7.37v-7.12C14.91,3.34,11.57,0,7.46,0m4.56,14.57c0,2.52-2.04,4.56-4.56,4.56s-4.56-2.04-4.56-4.56v-7.12c0-2.52,2.04-4.56,4.56-4.56s4.56,2.04,4.56,4.56v7.12Z" fill="#ffffff"/><path id="f" d="m7.46,7.09c-.93,0-1.68.75-1.68,1.68s.75,1.69,1.69,1.69c.93,0,1.68-.75,1.68-1.69s-.75-1.68-1.68-1.68h0" fill="#ffffff"/></g></g></g></svg>
+        </a>
+    </div></div>
+</section>

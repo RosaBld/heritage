@@ -1,0 +1,67 @@
+@import './mixins.scss';
+
+// .main-title {
+//     font-size: 110px;
+//     line-height: 1.1em;
+//     @include bp(lg) { font-size: 90px; }
+//     @include bp(md) { font-size: 80px; }
+//     @include bp(sm) { font-size: 60px; }
+//     @include bp(xs) { font-size: 35px; }
+// }
+  
+.main-title, .second-title {
+    font-size: 90px;
+    line-height: 1em;
+    font-weight: 400!important;
+    @include bp(lg) { font-size: 78px; }
+    @include bp(md) { font-size: 65px; }
+    @include bp(sm) { font-size: 40px; }
+    @include bp(xs) { font-size: 35px; }
+}
+  
+.main-title, .second-title {
+    &-minus {
+        font-size: 75px;
+        line-height: 1em;
+        font-weight: 400!important;
+        @include bp(lg) { font-size: 70px; }
+        @include bp(md) { font-size: 60px; }
+        @include bp(sm) { font-size: 38px; }
+        @include bp(xs) { font-size: 32px; }
+    }
+}
+  
+.louder {
+    font-size: 110px;
+    line-height: 0;
+    @include bp(lg) { font-size: 90px; }
+    @include bp(md) { font-size: 80px; }
+    @include bp(sm) { font-size: 70px; }
+    @include bp(xs) { font-size: 60px; }
+}
+  
+.third-title, .subtitle {
+    font-size: 48px;
+    line-height: 62px;
+    font-weight: 400;
+    @include bp(lg) { 
+        line-height: 1.1em;
+        font-size: 40px; 
+    }
+    @include bp(md) { font-size: 36px; }
+    @include bp(sm) { font-size: 32px; }
+    @include bp(xs) { font-size: 28px; }
+}
+
+.fourth-title, .subset {
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 18px;
+    &.b { font-weight: bold; }
+    @include bp(lg) {
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 15px;
+    }
+}
+

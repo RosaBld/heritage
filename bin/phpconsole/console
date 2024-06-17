@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+    use Symfony\Component\Console\Application;
+    use Console\InstallCommand;
+    
+    require_once __DIR__ . '/vendor/autoload.php';
+    
+    $app = new Application('Console App', 'v1.0.0');
+    $app -> add(new InstallCommand());
+    $app -> run();
