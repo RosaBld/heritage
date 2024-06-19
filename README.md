@@ -1,93 +1,72 @@
-# Lumber
+![Banner](/screen/heritage.png)
 
-Lumber is a modern WordPress stack made by [Alpaga](https://alpaga.agency/) that helps you get started with the best development tools and project structure. Based on [Bedrock](https://roots.io/bedrock/) and [Spruce](https://github.com/AlpagaAgency/spruce)
+# Heritage
 
-## Features
+This project was created during my internship at Alpaga Agency for emaprod immo.
 
-* Better folder structure
-* Dependency management with [Composer](http://getcomposer.org)
-* Easy WordPress configuration with environment specific files
-* Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-* Autoloader for mu-plugins (use regular plugins as mu-plugins)
-* Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
-* Easy maintenance and deploy services
-* Front-end made with Typescript and Sass
+This is a website for their new project, Heritage. 
 
-## Requirements
+## The goal 
 
-* PHP >= 7.0
-* npm
-* MySQL
-* Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+The goal was to learn how to create a new theme on WordPress by coding and not using the WordPress interface.
 
-## Installation
+### Difficulties
 
-1. Clone the git repo - `git clone https://code.alpaga.agency/alpaga/lumber.git`
-2. Run `make init`
-3. Follow the wizard for creating `.env` file if not created before:
-  * `DB_NAME` - Database name
-  * `DB_USER` - Database user
-  * `DB_PASSWORD` - Database password
-  * `DB_HOST` - Database host
-  * `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-  * `ENV_CURRENT` - Set the current DNS environment (`LOCAL`, `STAGING`, `LIVE`)
-  * `WP_HOME` - Full URL to WordPress home ([your-dns])
-  * `WP_TITLE` - Set the default title of the website
-  * `ENV_LOCAL_URI` - Set the local dns
-  * `ENV_LIVE_URI` - Set the live dns
-  * `ENV_STAGING_URI` - Set the staging dns
-  * `ENV_LIVE_REPO` - Set the hosting url and folder on the live repo (ex: example.com:www/)
-  * `ENV_STAGING_REPO` - Set the hosting url and folder on the staging repo (ex: example.com:staging/)
-4. Installing Database and Vhost, you have three methods:
-  * 1. Run `make init/local` if you have `webctl` bin installed
-  * 2. run `create/db` to create the mysql database and set your site vhost document root to `/path/to/site/public/`
-  * 3. Create manually your database and vhost
-5. Run `make install` to perform the full installation (database, theme, url and admin user)
-6. Access WP admin at `[your-dns]/wp/wp-admin` (Info, in local environment, just add .local after the live dns. Example: live uri => alpaga.agency, local uri => alpaga.agency.local)
+The main difficulty I faced during this project was to work with an old repo given by my intership supervisor and understand how it was conceived and how to work with it.
 
-## Deploys
+I needed to understand how they worked on this project and be able to work around it, without breaking it all.
 
-There are two kinds of deploys, first deploy and update deploy.
+The second main difficulty was to learn how to use the Dependency Manager Composer, as well as a bunch of new frameworks like timber and twig, while learning how WordPress works. Once those steps done, I only needed to conceive the style of the website by using SASS.
 
-The first thing to do is to configure your `ssh config` file with your staging/live dns
+#### Frameworks and dependencies
 
-### First deploy
+#### PHP Dependencies
+- PHP version: >=7.0|^8.0
+- composer/installers: ~1.0.12
+- vlucas/phpdotenv: ^5.4.0
+- johnpbloch/wordpress: *
+- oscarotero/env: ^1.0
+- roots/wp-password-bcrypt: ^1.0
+- timber/timber: v1.x
+- advanced-custom-fields/advanced-custom-fields-pro: 5.11.4
+- alpagastudio/spruce: dev-master
+- wpackagist-plugin/polylang: *
+- wpackagist-plugin/acf-options-for-polylang: *
+- mailchimp/transactional: ^1.0
+- fire015/flintstone: ^2.3
+- swiftmailer/swiftmailer: ^6.0
+#### PHP Dev Dependencies
+- squizlabs/php_codesniffer: ^2.5.1
+JavaScript Dependencies
+- @barba/core: ^2.9.7
+- @glidejs/glide: ^3.6.0
+- jquery: ^3.7.1
+#### JavaScript Dev Dependencies
+- @types/glidejs__glide: ^3.6.5
+#### Repositories
+- https://wpackagist.org
+- https://github.com/AlpagaAgency/spruce
+- https://github.com/ffaltin/timber-integration-woocommerce
+- advanced-custom-fields/advanced-custom-fields-pro package from https://connect.advancedcustomfields.com/index.php?p=pro&a=download
+#### Scripts
+- Test: vendor/bin/phpcs --ignore=public/wp/,vendor/ -n -s .
+#### Extra
+- Installer paths and WordPress install directory configurations.
 
-1. Choose which environment to deploy the website:
-  * 1. Run `make init/live` to dump your database, zip your files and send it to the live environment.
-  * 2. Run `make init/staging` to dump your database, zip your files and send it to the staging environment.
-2. Run `make connect/live` (or `make connect/staging`) to connect through ssh tunnel to the environment.
-3. Run `unzip www.zip`, then `mysql ...(mysql credentials) < [file]` and finally update the `.env` with the credentials provided by the hosting.
-4. Navigate to `[your-dns]` for viewing your website.
+### Languages
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![SASS](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![JAVASCRIPT](https://img.shields.io/badge/logo-javascript-blue?logo=javascript)
+![TYPESCRIPT](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
-### Next update
-
-1. Run `make deploy/live` (or `make deploy/staging`) and chill.
-
-## Documentation
-
-There are a lot of commands provided to improve productivity
-
-### Change Scheme
-
-You want to change the scheme of the wordpress installation, perfom these commands:
-1. Choose scheme migration: 
-  * 1. Run `make migrate/gotohttps` for going to https
-  * 2. Run `make migrate/gotohttp` for going to http
-
-### Update wordpress and plugins
-
-1. Choose type of update: 
-  * 1. Run `make wp/update` for updating wp/core and plugins. With this command, the wordpress will perform a backup before updating all.
-  * 2. Run `make wp/core/update` for updating wp/core only
-
-### Add recommended plugins to the wordpress website
-
-1. Run `make wp/plugins/recommended`
-
-### Front-end development
-
-There are three methods : 
-1. `make npm/install` for installing all front-end library
-2. `make build/dev` for compiling script and style (with watch method)
-3. `make build/live` for compiling script and style before sending it to staging or live environment
+### Screenshots
+![screenshot_app](/screen/heritage1.png)
+![screenshot_app](/screen/heritage2.png)
+![screenshot_app](/screen/heritage3.png)
+![screenshot_app](/screen/heritage4.png)
+![screenshot_app](/screen/heritage5.png)
+![screenshot_app](/screen/heritage6.png)
+![screenshot_app](/screen/heritage7.png)
+![screenshot_app](/screen/heritage8.png)
